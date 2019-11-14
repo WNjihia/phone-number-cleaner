@@ -19,6 +19,13 @@ window.onload = function() {
 
   input.addEventListener("keyup", function(event){
     var value = event.currentTarget.value;
+    console.log(value);
+    valid = validateNumber(value);
+    if (valid){
+      // format number
+    } else {
+      // return error
+    }
   })
 
   // ensure phone number contains only 0-9
@@ -28,4 +35,10 @@ window.onload = function() {
       return false;
     }
   })
+
+  // check if format is valid
+  function validateNumber(number){
+    var phoneRegex = "/^[\+]?[(]?[2-9]{1}[0-9]{2}[)]?[-\s\.]?[2-9]{1}[0-9]{2}[-\s\.]?[0-9]{4}$/"
+    return phoneRegex.test(number)
+  }
 }
