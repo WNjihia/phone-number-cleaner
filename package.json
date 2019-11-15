@@ -1,0 +1,29 @@
+{
+  "name": "phone-number-cleaner",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "dependencies": {
+    "chai": "^4.2.0"
+  },
+  "devDependencies": {
+    "mocha": "^6.2.2",
+    "selenium-webdriver": "^4.0.0-alpha.5"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WNjihia/phone-number-cleaner.git"
+  },
+  "author": "WNjihia",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/WNjihia/phone-number-cleaner/issues"
+  },
+  "homepage": "https://github.com/WNjihia/phone-number-cleaner#readme"
+}
