@@ -25,15 +25,3 @@ describe('Unit Tests', function(){
   });
 
 });
-
-
-describe('Integration Test', function(){
-  it('should display correctly formatted number', function(){
-
-  });
-
-  // excess digits - more than 10 digits excluding country code
-  // it('should indicate failure when number has excess digits', function(){
-  //   assert.equal(validateNumber("613 995 995 0253"), false);
-  // });
-});
