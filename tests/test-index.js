@@ -1,9 +1,9 @@
-var assert = require('assert');
-var chai = require('chai');
-var expect = chai.expect();
-var should = chai.should();
-var test = require('selenium-webdriver/testing');
-var webdriver = require('selenium-webdriver');
+let assert = require('assert');
+let chai = require('chai');
+let expect = chai.expect();
+let should = chai.should();
+let test = require('selenium-webdriver/testing');
+let webdriver = require('selenium-webdriver');
 const cleaner = require('./scripts/index.js');
 
 
@@ -31,7 +31,7 @@ describe('Unit Tests', function(){
   });
 
   it('successfully should format punctuation on valid numbers', function(){
-    var result = cleaner.formatNumber("613.995.0253");
+    let result = cleaner.formatNumber("613.995.0253");
     assert.equal(result, "6139950253");
   });
 
@@ -47,7 +47,7 @@ describe('Integration Test', function(){
 test.describe('UI Test', function(){
   test.before(function () {
     // initializing chrome driver
-    var driver = new webdriver.Builder()
+    let driver = new webdriver.Builder()
     .withCapabilities(webdriver.Capabilities.chrome())
     .build();
 
@@ -82,7 +82,7 @@ test.describe('UI Test', function(){
 
   test.it('should successfully display formatted number', function(){
     driver.findElement(webdriver.By.id(phoneNumber)).sendKeys("613 995 0253");
-    var response = driver.findElement(webdriver.By.id(formattedNumber));
+    let response = driver.findElement(webdriver.By.id(formattedNumber));
     response.getAttribute('value').then(function(value) {
       assert.equal(value, '6139950253');
     });
@@ -90,14 +90,14 @@ test.describe('UI Test', function(){
 
   test.it('should display error message for invalid formats', function(){
     driver.findElement(webdriver.By.id(phoneNumber)).sendKeys("613 995 025");
-    var response = driver.findElement(webdriver.By.id(errorSpan));
+    let response = driver.findElement(webdriver.By.id(errorSpan));
     response.getAttribute('value').then(function(value) {
       assert.equal(value, 'Please enter a valid NANP number');
     });
   });
 
   test.it('should not allow user to input a letter', function(){
-    var inputBox = driver.findElement(webdriver.By.id(phoneNumber)).sendKeys("a");
+    let inputBox = driver.findElement(webdriver.By.id(phoneNumber)).sendKeys("a");
     inputBox.getAttribute('value').then(function(value) {
       assert.equal(value, '');
     });

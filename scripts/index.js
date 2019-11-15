@@ -26,13 +26,22 @@ window.onload = function() {
   filter.push(48);    //)
   filter.push(57);    //(
 
-  input.addEventListener("keyup", function(event){
-    // ensure phone number contains only 0-9
-    if (filter.indexOf(event.keyCode) < 0){
-      event.preventDefault();
-      return false;
+    // check if format is valid
+    function validateNumber(number){
+      return PHONE_REGEX.test(number);
     }
 
+    // clean up punctuation and 1
+    function formatNumber(number){
+      let num = number.replace(TO_REPLACE, "");
+      let firstDigit = num.match(/\d/);
+      if (firstDigit[0] == "1"){
+          return num.substring(1);
+      }
+      return num;
+    }
+
+  input.addEventListener("keyup", function(event){
     let value = event.currentTarget.value;
     valid = validateNumber(value);
     if (valid){
@@ -42,20 +51,14 @@ window.onload = function() {
     } else {
       errorSpan.innerHTML = "Please enter a valid NANP number";
     }
-  })
+  });
 
-  // check if format is valid
-  function validateNumber(number){
-    return PHONE_REGEX.test(number);
-  }
-
-  // clean up punctuation and 1
-  function formatNumber(number){
-    let num = number.replace(TO_REPLACE, "");
-    let firstDigit = num.match(/\d/);
-    if (firstDigit[0] == "1"){
-        return num.substring(1);
+  input.addEventListener("keydown", function(event){
+    // ensure phone number contains only 0-9
+    if (filter.indexOf(event.keyCode) < 0){
+      event.preventDefault();
+      return false;
     }
-    return num;
-  }
+  });
+
 }
