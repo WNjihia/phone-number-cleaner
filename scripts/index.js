@@ -41,15 +41,27 @@ window.onload = function() {
       return num;
     }
 
+    function setError(msg){
+      errorSpan.innerHTML = msg ? "Please enter a valid NANP number" : "";
+      errorSpan.style.visibility = "";
+      formattedNumber.innerHTML = "";
+    }
+
   input.addEventListener("keyup", function(event){
     let value = event.currentTarget.value;
     valid = validateNumber(value);
     if (valid){
       let newValue = formatNumber(value);
-      formattedNumber.innerHTML = newValue;
-      errorSpan.style.visibility = "hidden";
+      if (newValue.length > 10){
+        setError(true);
+      } else {
+        formattedNumber.innerHTML = newValue;
+        errorSpan.style.visibility = "hidden";
+      }
+    } else if (!value) {
+      setError();
     } else {
-      errorSpan.innerHTML = "Please enter a valid NANP number";
+      setError(true);
     }
   });
 
