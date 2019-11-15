@@ -27,31 +27,40 @@ window.onload = function() {
 
   input.addEventListener("keyup", function(event){
     var value = event.currentTarget.value;
-    console.log(value);
     valid = validateNumber(value);
     if (valid){
-      formattedNumber.innerHTML = value;
-      errorSpan.style.visibility = 'hidden';
+      console.log("before", value);
+      var newValue = formatNumber(value);
+      console.log("after", value);
+      console.log("new value", newValue);
+      formattedNumber.innerHTML = newValue;
+      errorSpan.style.visibility = "hidden";
     } else {
-      errorSpan.innerHTML = "Invalid format";
+      errorSpan.innerHTML = "Please enter a valid NANP number";
     }
   })
 
   // ensure phone number contains only 0-9
   input.addEventListener("keydown", function(event){
-    if (filter.indexOf(event.keyCode) < 0){
-      event.preventDefault();
-      return false;
-    }
+
   })
 
   // check if format is valid
   function validateNumber(number){
-    var phoneRegex = /^([+]?1[\s]?)?((?:[(](?:[2-9]1[02-9]|[2-9][02-8][0-9])[)][\s]?)|(?:(?:[2-9]1[02-9]|[2-9][02-8][0-9])[\s.-]?)){1}([2-9]1[02-9]|[2-9][02-9]1|[2-9][02-9]{2}[\s.-]?){1}([0-9]{4}){1}$/;
-    return phoneRegex.test(number)
+    var phoneRegex = /^([+]?1[\s]?)?[(]?[2-9]{1}[0-9]{2}?[)]?([\s.-])?[2-9]{1}[0-9]{2}?([\s.-])?[0-9]{4}|[2-9]{1}[0-9]{2}?([\s.-])?[2-9]{1}[0-9]{2}?([\s.-])?[0-9]{4}|(1)?([\s.-])?[2-9]{1}[0-9]{2}?([\s.-])?[2-9]{1}[0-9]{2}?([\s.-])?[0-9]{4}/
+    return phoneRegex.test(number);
   }
 
-  // function formatNumber(number){
-  //   var reg = /
-  // }
+  // clean up punctuation and + 1
+  function formatNumber(number){
+    var toReplace = /[.,\/#!$%\^&\*;:{}\+=\-_\s`~()]/g;
+    var num = number.replace(toReplace, "");
+    var firstDigit = num.match(/\d/);
+    if (firstDigit[0] == "1"){
+        // console.log(num);
+        return num.substring(1);
+    }
+    // console.log(num);
+    return num;
+  }
 }
