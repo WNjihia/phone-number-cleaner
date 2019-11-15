@@ -1,14 +1,15 @@
 window.onload = function() {
-  var input = document.getElementById("phoneNumber");
-  var errorSpan = document.getElementById("error");
-  var formattedNumber = document.getElementById("formattedNumber");
-  var filter = [];
+  let input = document.getElementById("phoneNumber");
+  let errorSpan = document.getElementById("error");
+  let formattedNumber = document.getElementById("formattedNumber");
+  const PHONE_REGEX = /^([+]?1[\s]?)?[(]?[2-9]{1}[0-9]{2}?[)]?([\s.-])?[2-9]{1}[0-9]{2}?([\s.-])?[0-9]{4}|[2-9]{1}[0-9]{2}?([\s.-])?[2-9]{1}[0-9]{2}?([\s.-])?[0-9]{4}|(1)?([\s.-])?[2-9]{1}[0-9]{2}?([\s.-])?[2-9]{1}[0-9]{2}?([\s.-])?[0-9]{4}/
+  const TO_REPLACE = /[.,\/#!$%\^&\*;:{}\+=\-_\s`~()]/g;let filter = [];
 
   //adding keycodes to filter - numeric keys/numpad
   const keypadZero = 48;
   const numpadZero = 96;
 
-  for(var i = 0; i <= 9; i++){
+  for(let i = 0; i <= 9; i++){
     filter.push(i + keypadZero);
     filter.push(i + numpadZero);
   }
@@ -32,13 +33,10 @@ window.onload = function() {
       return false;
     }
 
-    var value = event.currentTarget.value;
+    let value = event.currentTarget.value;
     valid = validateNumber(value);
     if (valid){
-      console.log("before", value);
-      var newValue = formatNumber(value);
-      console.log("after", value);
-      console.log("new value", newValue);
+      let newValue = formatNumber(value);
       formattedNumber.innerHTML = newValue;
       errorSpan.style.visibility = "hidden";
     } else {
@@ -48,20 +46,16 @@ window.onload = function() {
 
   // check if format is valid
   function validateNumber(number){
-    var phoneRegex = /^([+]?1[\s]?)?[(]?[2-9]{1}[0-9]{2}?[)]?([\s.-])?[2-9]{1}[0-9]{2}?([\s.-])?[0-9]{4}|[2-9]{1}[0-9]{2}?([\s.-])?[2-9]{1}[0-9]{2}?([\s.-])?[0-9]{4}|(1)?([\s.-])?[2-9]{1}[0-9]{2}?([\s.-])?[2-9]{1}[0-9]{2}?([\s.-])?[0-9]{4}/
-    return phoneRegex.test(number);
+    return PHONE_REGEX.test(number);
   }
 
-  // clean up punctuation and + 1
+  // clean up punctuation and 1
   function formatNumber(number){
-    var toReplace = /[.,\/#!$%\^&\*;:{}\+=\-_\s`~()]/g;
-    var num = number.replace(toReplace, "");
-    var firstDigit = num.match(/\d/);
+    let num = number.replace(TO_REPLACE, "");
+    let firstDigit = num.match(/\d/);
     if (firstDigit[0] == "1"){
-        // console.log(num);
         return num.substring(1);
     }
-    // console.log(num);
     return num;
   }
 }
