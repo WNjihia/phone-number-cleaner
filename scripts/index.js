@@ -26,6 +26,12 @@ window.onload = function() {
   filter.push(57);    //(
 
   input.addEventListener("keyup", function(event){
+    // ensure phone number contains only 0-9
+    if (filter.indexOf(event.keyCode) < 0){
+      event.preventDefault();
+      return false;
+    }
+
     var value = event.currentTarget.value;
     valid = validateNumber(value);
     if (valid){
@@ -38,11 +44,6 @@ window.onload = function() {
     } else {
       errorSpan.innerHTML = "Please enter a valid NANP number";
     }
-  })
-
-  // ensure phone number contains only 0-9
-  input.addEventListener("keydown", function(event){
-
   })
 
   // check if format is valid
