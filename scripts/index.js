@@ -1,5 +1,7 @@
 window.onload = function() {
   var input = document.getElementById("phoneNumber");
+  var errorSpan = document.getElementById("error");
+  var formattedNumber = document.getElementById("formattedNumber");
   var filter = [];
 
   //adding keycodes to filter - numeric keys/numpad
@@ -15,16 +17,23 @@ window.onload = function() {
   filter.push(9);     //tab
   filter.push(46);    //delete
   filter.push(37);    //left arrow
+  filter.push(187);   //+
   filter.push(39);    //right arrow
+  filter.push(32);    //space
+  filter.push(189);   //-
+  filter.push(190);   //.
+  filter.push(48);    //)
+  filter.push(57);    //(
 
   input.addEventListener("keyup", function(event){
     var value = event.currentTarget.value;
     console.log(value);
     valid = validateNumber(value);
     if (valid){
-      // format number
+      formattedNumber.innerHTML = value;
+      errorSpan.style.visibility = 'hidden';
     } else {
-      // return error
+      errorSpan.innerHTML = "Invalid format";
     }
   })
 
@@ -38,7 +47,11 @@ window.onload = function() {
 
   // check if format is valid
   function validateNumber(number){
-    var phoneRegex = "/^[\+]?[(]?[2-9]{1}[0-9]{2}[)]?[-\s\.]?[2-9]{1}[0-9]{2}[-\s\.]?[0-9]{4}$/"
+    var phoneRegex = /^([+]?1[\s]?)?((?:[(](?:[2-9]1[02-9]|[2-9][02-8][0-9])[)][\s]?)|(?:(?:[2-9]1[02-9]|[2-9][02-8][0-9])[\s.-]?)){1}([2-9]1[02-9]|[2-9][02-9]1|[2-9][02-9]{2}[\s.-]?){1}([0-9]{4}){1}$/;
     return phoneRegex.test(number)
   }
+
+  // function formatNumber(number){
+  //   var reg = /
+  // }
 }
