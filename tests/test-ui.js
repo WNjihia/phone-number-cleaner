@@ -72,11 +72,12 @@ describe('UI Test', function() {
   });
 
   it('input box includes a placeholder', function(){
-
-  });
-
-  it('has a run unit tests link', function(){
-
+    placeHolder = driver.findElement(webdriver.By.id('phoneNumber'));
+    placeHolder.getAttribute('placeholder').then(function(placeHolder) {
+      assert.equal(placeHolder, 'Enter a phone number (XXX-XXX-XXXX)');
+    }).catch(function(err) {
+      console.log(err)
+    });
   });
 
   it('input value changes when a non-alphabet key is pressed', function() {
