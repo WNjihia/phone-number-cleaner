@@ -19,8 +19,13 @@ describe('Unit Tests', function(){
     assert.equal(validateNumber("1 613 995 0253"), true);
   });
 
-  it('successfully should format punctuation on valid numbers', function(){
+  it('successfully should format punctuation in valid numbers', function(){
     let result = formatNumber("613.995.0253");
+    assert.equal(result, "6139950253");
+  });
+
+  it('successfully formats country code in valid numbers', function(){
+    let result = formatNumber("1 613 995 0253");
     assert.equal(result, "6139950253");
   });
 
