@@ -5,6 +5,7 @@ var chrome = require('selenium-webdriver/chrome');
 var chromedriver = require('chromedriver');
 var fs = require('fs');
 
+require('dotenv').config();
 const PORT = process.env.PORT || 8080;
 
 let driver;
