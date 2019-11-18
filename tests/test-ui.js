@@ -5,6 +5,8 @@ var chrome = require('selenium-webdriver/chrome');
 var chromedriver = require('chromedriver');
 var fs = require('fs');
 
+const PORT = process.env.PORT || 8080;
+
 let driver;
 
 describe('UI Test', function() {
@@ -14,7 +16,7 @@ describe('UI Test', function() {
       .withCapabilities(webdriver.Capabilities.chrome())
       .build();
 
-    driver.get('http://127.0.0.1:8080');
+    driver.get(`http://127.0.0.1:${PORT}`);
 
     // maximizing chrome browser
     driver.manage().window().maximize();
