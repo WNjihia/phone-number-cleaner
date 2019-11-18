@@ -29,14 +29,14 @@ http-server .
 
 Open the browser and go to:
 ```
-localhost:8080
+localhost:${PORT}
 ```
 
 ### Testing
 To run the unit tests, click on the `Run Unit Tests` link on the far right corner on your browser.
-Kindly note that you'll need to start your server and load `localhost:8080` to be able to access the link.
+Kindly note that you'll need to start your server and load `localhost:${PORT}` to be able to access the link.
 
 To run the ui tests, run the following command on your terminal:
 ```
-npm run test tests/test-ui.js
+mocha test tests/test-ui.js
 ```
