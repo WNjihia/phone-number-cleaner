@@ -38,5 +38,5 @@ Kindly note that you'll need to start your server and load `localhost:8080` to b
 
 To run the ui tests, run the following command on your terminal:
 ```
-mocha tests/test-ui.js
+npm run test tests/test-ui.js
 ```
