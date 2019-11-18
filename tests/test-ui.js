@@ -80,6 +80,15 @@ describe('UI Test', function() {
     });
   });
 
+  it('has a run unit tests link', function(){
+    link = driver.findElement(webdriver.By.tagName("a"));
+    link.getText().then(function(link) {
+      assert.equal(link, 'Run Unit Tests');
+    }).catch(function(err) {
+      console.log(err)
+    });
+  });
+
   it('input value changes when a non-alphabet key is pressed', function() {
     let initialValue = driver.findElement(webdriver.By.id('phoneNumber'));
     initialValue.getAttribute('value').then(function(value) {
